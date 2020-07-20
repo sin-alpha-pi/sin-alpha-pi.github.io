@@ -1,8 +1,10 @@
 let currentLocation = window.location;
 let search = currentLocation.search;
 console.log(search)
+
 let trackName = document.getElementById("track-name")
 let artists = document.getElementById("artists")
+
 const clientId = "fbb75d3e11e44656917e9c6a9a9a301d";
 const clientSecret = "9a94271741d547d9a365bf6327363156";
 const encodedAuthString = btoa(clientId + ":" + clientSecret);
@@ -26,6 +28,7 @@ function main() {
             return resp.json();
         })
         .then(function(data) {
+            var accessToken = data.access_token;
             fetch(`https://api.spotify.com/v1/search?q=${getTrackName()}`, {
                     headers: {
                         'Authorization': "Bearer " + data.access_token
@@ -45,5 +48,4 @@ function main() {
                 })
         })
 }
-console.log("hey")
 main()
